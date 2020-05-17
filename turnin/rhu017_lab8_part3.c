@@ -25,27 +25,12 @@ int main(void) {
     /* Insert your solution below */
     ADC_init();
     unsigned short adc_read = ADC;
-    unsigned short temp = light_max/8;
     while (1) {
 		adc_read = ADC;
-            if(adc_read < temp)
-                  PORTB = 0x00;
-            else if(adc_read < temp * 2)
+            if(adc_read >= light_max/2)
                   PORTB = 0x01;
-            else if(adc_read < temp * 3)
-                  PORTB = 0x02;
-            else if(adc_read < temp * 4)
-                  PORTB = 0x04;
-            else if(adc_read < temp * 5)
-                  PORTB = 0x08;
-            else if(adc_read < temp * 6)
-                  PORTB = 0x10;
-            else if(adc_read < temp * 7)
-                  PORTB = 0x20;
-            else if(adc_read < temp * 8)
-                  PORTB = 0x40;
             else
-                  PORTB = 0x80;
+                  PORTB = 0x00;
     }
     return 1;
 }
